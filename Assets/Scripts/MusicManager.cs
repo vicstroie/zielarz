@@ -19,7 +19,7 @@ public class MusicManager : MonoBehaviour
         
     }
 
-    
+    /*
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("River"))
@@ -35,5 +35,5 @@ public class MusicManager : MonoBehaviour
             SoundSystem.instance.StopSound("River");
         }
     }
-    
+    */
 }
