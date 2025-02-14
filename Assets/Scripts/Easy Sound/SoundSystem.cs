@@ -78,6 +78,25 @@ public class SoundSystem : MonoBehaviour
 
     }
 
+    public void StopSound(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+
+        if (s == null)
+        {
+            Debug.LogWarning("Sound: " + name + " not found");
+            return;
+        }
+        else
+        {
+
+            Debug.Log("stop sound: " + s.name);
+
+        }
+
+        s.source.Stop();
+    }
+
     public void StopLastSound() 
     {
         if (lastPlayedSFX)
