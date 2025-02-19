@@ -8,6 +8,8 @@ TagManager:
   - Selectable
   - River
   - Church
+  - Plant
+  - DryingRack
   layers:
   - Default
   - TransparentFX
