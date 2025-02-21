@@ -38,6 +38,8 @@ public class InventoryManager : MonoBehaviour
         item.transform.position = this.transform.position;
         item.GetComponent<SpriteRenderer>().enabled = false;
         item.GetComponent<BoxCollider>().enabled = false;
+
+        Debug.Log("Added");
     }
 
     public GameObject RetrieveLastObject()
@@ -50,6 +52,22 @@ public class InventoryManager : MonoBehaviour
         {
             return null;
         }
+    }
+
+    public bool DoesLastObjectExist()
+    {
+
+        GameObject lastObject;
+
+        if(!InventoryIsEmpty())
+        {
+            lastObject = inventory[inventory.Count - 1];
+        } else
+        {
+            lastObject = null;
+        }
+
+        return lastObject != null;
     }
     public void RemoveFromInventory()
     {

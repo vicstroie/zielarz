@@ -82,7 +82,7 @@ public class SelectionBehavior : MonoBehaviour
                     {
                         Debug.Log("dryingRack!");
                         //Adds last addition to inventory to dryingrack
-                        _selection.GetComponent<DryingRackBehavior>().AddToInventory(this.GetComponent<InventoryManager>().RetrieveLastObject());
+                        if(this.GetComponent<InventoryManager>().DoesLastObjectExist()) _selection.GetComponent<DryingRackBehavior>().AddToInventory(this.GetComponent<InventoryManager>().RetrieveLastObject());
                     }
                 }
                 

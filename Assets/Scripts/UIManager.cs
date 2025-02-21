@@ -28,7 +28,7 @@ public class UIManager : MonoBehaviour
     {
         fullBasketWarning.SetActive(true);
         eraseableElement = fullBasketWarning;
-        Invoke("EraseElement", 0.5f);
+        Invoke("EraseElement", 0.75f);
         
     }
 
