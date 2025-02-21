@@ -57,10 +57,13 @@ public class SelectionBehavior : MonoBehaviour
                     //CHECKS IF INVENTORY IS FULL
                     if(!this.GetComponent<InventoryManager>().InventoryIsFull())
                     {
-                        this.GetComponent<InventoryManager>().AddToInventory(_selection.gameObject);
-                        SoundSystem.instance.PlaySound("pickUp");
-                        _selection = null;
-                    } else
+                        if(_selection.GetComponent<PlantBehavior>().isPickable)
+                        {
+                            this.GetComponent<InventoryManager>().AddToInventory(_selection.gameObject);
+                            SoundSystem.instance.PlaySound("pickUp");
+                            _selection = null;
+                        }
+                    } else 
                     {
                         //Warn Player that Basket is Full
                         this.GetComponent<UIManager>().WarnFullBasket();
