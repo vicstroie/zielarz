@@ -30,7 +30,8 @@ public class SelectionBehavior : MonoBehaviour
 
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit))
+        Debug.DrawRay(ray.origin, ray.direction * 5);
+        if (Physics.Raycast(ray, out hit, 5))
         {
             var selection = hit.transform;
             var selectionRenderer = selection.GetComponent<Renderer>();

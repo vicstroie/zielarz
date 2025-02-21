@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3682202319653517634}
   - component: {fileID: 1090963990873258427}
   - component: {fileID: 5703410507039538732}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dziurawiec
   m_TagString: Plant
   m_Icon: {fileID: 0}
