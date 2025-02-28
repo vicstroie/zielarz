@@ -73,4 +73,9 @@ public class InventoryManager : MonoBehaviour
     {
         if(!InventoryIsEmpty()) inventory.Remove(inventory[inventory.Count - 1]);
     }
+
+    public List<GameObject> GetInventoryValues()
+    {
+        return inventory;
+    }
 }

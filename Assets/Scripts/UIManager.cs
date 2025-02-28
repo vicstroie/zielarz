@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject fullBasketWarning;
     [SerializeField] GameObject menu;
     [SerializeField] GameObject hand;
+    [SerializeField] List<GameObject> inventory;
 
     [Header("Sprites")]
     [SerializeField] Sprite idle;
@@ -17,6 +18,7 @@ public class UIManager : MonoBehaviour
     //private variables
     GameObject eraseableElement;
     bool menuIsActive;
+    private List<GameObject> inventoryValues;
 
 
     // Start is called before the first frame update
@@ -32,7 +34,17 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E)) {
             menuIsActive = !menuIsActive;
-            if(menuIsActive) menu.SetActive(false); else menu.SetActive(true);
+            if (menuIsActive) menu.SetActive(false); else {
+                menu.SetActive(true);
+
+                inventoryValues = this.GetComponent<InventoryManager>().GetInventoryValues();
+                Debug.Log(inventoryValues.Count);
+                for (int i = 0; i < inventory.Count; i++)
+                {
+                    if (inventoryValues[i] != null) inventory[i].GetComponent<RawImage>().texture = inventoryValues[i].GetComponent<SpriteRenderer>().sprite.texture;
+                }
+            }
+            
         }
     }
 
