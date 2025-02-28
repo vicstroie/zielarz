@@ -10,6 +10,7 @@ TagManager:
   - Church
   - Plant
   - DryingRack
+  - Crafting
   layers:
   - Default
   - TransparentFX

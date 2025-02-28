@@ -6,6 +6,8 @@ using UnityEngine;
 public class SelectionBehavior : MonoBehaviour
 {
 
+    [SerializeField] GameObject playerCamera;
+
     private Transform _selection;
     private bool isLooking;
 
@@ -36,7 +38,7 @@ public class SelectionBehavior : MonoBehaviour
             var selection = hit.transform;
             var selectionRenderer = selection.GetComponent<Renderer>();
 
-            if (selection.CompareTag("Selectable") || selection.CompareTag("Plant") || selection.CompareTag("DryingRack"))
+            if (selection.CompareTag("Selectable") || selection.CompareTag("Plant") || selection.CompareTag("DryingRack") || selection.CompareTag("Crafting"))
             {
                 isLooking = true;
                 _selection = selection;
@@ -50,6 +52,9 @@ public class SelectionBehavior : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) && _selection != null)
             {
+
+                this.GetComponent<UIManager>().Grab();
+
                 //ADD OTHER SELECTABLES HERE
                 if (_selection.CompareTag("Selectable")) {
 
@@ -84,6 +89,10 @@ public class SelectionBehavior : MonoBehaviour
                         //Adds last addition to inventory to dryingrack
                         if(this.GetComponent<InventoryManager>().DoesLastObjectExist()) _selection.GetComponent<DryingRackBehavior>().AddToInventory(this.GetComponent<InventoryManager>().RetrieveLastObject());
                     }
+                } else if(_selection.CompareTag("Crafting"))
+                {
+                    Debug.Log("isCrafting");
+                    _selection.GetComponent<CraftingBehavior>().StartCraft(playerCamera, this.gameObject);
                 }
                 
                 //Destroy(_selection.gameObject);
