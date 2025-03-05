@@ -38,7 +38,7 @@ public class SelectionBehavior : MonoBehaviour
             var selection = hit.transform;
             var selectionRenderer = selection.GetComponent<Renderer>();
 
-            if (selection.CompareTag("Selectable") || selection.CompareTag("Plant") || selection.CompareTag("DryingRack") || selection.CompareTag("Crafting"))
+            if (selection.CompareTag("Selectable") || selection.CompareTag("Plant") || selection.CompareTag("DryingRack") || selection.CompareTag("Crafting") || selection.CompareTag("Butcher"))
             {
                 isLooking = true;
                 _selection = selection;
@@ -94,7 +94,12 @@ public class SelectionBehavior : MonoBehaviour
                     Debug.Log("isCrafting");
                     _selection.GetComponent<CraftingBehavior>().StartCraft(playerCamera, this.gameObject);
                 }
-                
+                else if (_selection.CompareTag("Butcher"))
+                {
+                    Debug.Log("isCrafting");
+                    _selection.GetComponent<ButcherBehavior>().StartChop(playerCamera, this.gameObject);
+                }
+
                 //Destroy(_selection.gameObject);
             }
 

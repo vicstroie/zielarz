@@ -11,6 +11,7 @@ TagManager:
   - Plant
   - DryingRack
   - Crafting
+  - Butcher
   layers:
   - Default
   - TransparentFX
