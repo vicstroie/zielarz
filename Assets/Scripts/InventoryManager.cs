@@ -5,15 +5,18 @@ using UnityEngine;
 public class InventoryManager : MonoBehaviour
 {
     //Contents of the Inventory
-    public List<GameObject> inventory;
+    public GameObject[] inventory;
 
     [Header("Changeable Variables")]
     [SerializeField] int maxCapacity;
 
+    int lastAddedIndex;
+
     // Start is called before the first frame update
     void Start()
     {
-        inventory = new List<GameObject>();
+        inventory = new GameObject[maxCapacity];
+        maxCapacity = 10;
     }
 
     // Update is called once per frame
@@ -24,17 +27,44 @@ public class InventoryManager : MonoBehaviour
 
     public bool InventoryIsFull()
     {
-        return inventory.Count >= maxCapacity;
+        int filledCount = 0;
+
+        for(int i = 0; i < maxCapacity; i++)
+        {
+            if (inventory[i] != null) filledCount++;
+        }
+
+        return filledCount == maxCapacity;
     }
 
     public bool InventoryIsEmpty()
     {
-        return inventory.Count == 0;
+        int nullCount = 0;
+
+        for (int i = 0; i < maxCapacity; i++)
+        {
+            if (inventory[i] != null) nullCount++;
+        }
+
+        return nullCount == 0;
     }
 
     public void AddToInventory(GameObject item)
     {
-        inventory.Add(item);
+        int emptyPosition = 0;
+
+        for (int j = 0; j < maxCapacity; j++)
+        {;
+            if (inventory[j] == null)
+            {
+                emptyPosition = j;
+                break;
+            }
+            
+        }
+
+        inventory[emptyPosition] = item;
+        //lastAddedIndex++;
         item.transform.position = this.transform.position;
         item.GetComponent<SpriteRenderer>().enabled = false;
         item.GetComponent<BoxCollider>().enabled = false;
@@ -42,39 +72,53 @@ public class InventoryManager : MonoBehaviour
         Debug.Log("Added");
     }
 
-    public GameObject RetrieveLastObject()
+    public bool DoesHaveFlowers()
     {
-        if (!InventoryIsEmpty()) {
-            GameObject lastObject = inventory[inventory.Count - 1];
-            inventory.Remove(inventory[inventory.Count - 1]);
-            return lastObject;
-        } else
-        {
-            return null;
-        }
-    }
+        bool hasFlowers = false;
 
-    public bool DoesLastObjectExist()
-    {
-
-        GameObject lastObject;
-
-        if(!InventoryIsEmpty())
+        for (int i = 0; i < maxCapacity; i++)
         {
-            lastObject = inventory[inventory.Count - 1];
-        } else
-        {
-            lastObject = null;
+            if (inventory[i] != null && inventory[i].CompareTag("Plant")) {
+                hasFlowers = true;
+                break;
+            }  
         }
 
-        return lastObject != null;
+        return hasFlowers;
     }
+
+    public GameObject GetLastFlower()
+    {
+        List<GameObject> flowers = new List<GameObject>();
+        List<int> flowerIndexes = new List<int>();
+
+        for (int i = 0; i < maxCapacity; i++)
+        {
+            if (inventory[i] != null && inventory[i].CompareTag("Plant")) {
+                flowers.Add(inventory[i]);
+                flowerIndexes.Add(i);
+            } 
+
+        }
+
+        GameObject flowerReturn = flowers[flowers.Count - 1];
+        inventory[flowerIndexes[flowerIndexes.Count - 1]] = null;
+
+        return flowerReturn;
+
+    }
+
+
+    
     public void RemoveFromInventory()
     {
-        if(!InventoryIsEmpty()) inventory.Remove(inventory[inventory.Count - 1]);
+        if(!InventoryIsEmpty())
+        {
+            inventory[lastAddedIndex - 1] = null;
+        }
     }
 
-    public List<GameObject> GetInventoryValues()
+    public GameObject[] GetInventoryValues()
     {
         return inventory;
     }

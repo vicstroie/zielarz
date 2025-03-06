@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -8,7 +9,9 @@ public class ButcherRabbitBehavior : MonoBehaviour
 
 
     [SerializeField] Sprite cutLeg;
-    [SerializeField] GameObject bloodParticles;
+    [SerializeField] GameObject bloodParticles1;
+    [SerializeField] GameObject bloodParticles2;
+    [SerializeField] GameObject bloodParticles3;
 
     Camera cam;
     Vector3 screenPosition;
@@ -16,10 +19,13 @@ public class ButcherRabbitBehavior : MonoBehaviour
 
     Vector3 legPosition;
 
+    int cutCount;
+
     // Start is called before the first frame update
     void Start()
     {
         cam = Camera.main;
+        cutCount = 0;
         legPosition = new Vector3(-82.7f, 20.4f, -25.3f);
     }
 
@@ -37,10 +43,26 @@ public class ButcherRabbitBehavior : MonoBehaviour
 
         if(worldPosition.x < legPosition.x + 0.5f && worldPosition.x > legPosition.x - 0.5f
             && worldPosition.y < legPosition.y + 0.5f && worldPosition.y > legPosition.y - 0.5f
-            && Input.GetMouseButtonDown(0))
+            && Input.GetMouseButtonDown(0) && cutCount < 3)
         {
-            this.GetComponent<SpriteRenderer>().sprite = cutLeg;
-            bloodParticles.SetActive(true);
+            switch(cutCount)
+            {
+                case 0:
+                    bloodParticles1.SetActive(true);
+                    break;
+                case 1:
+                    bloodParticles2.SetActive(true);
+                    break;
+                case 2:
+                    bloodParticles3.SetActive(true);
+                    this.GetComponent<SpriteRenderer>().sprite = cutLeg;
+                    break;
+                default:
+                    break;
+            }
+
+            cutCount++;
+            
         }
 
         //Vector3 mousePos = worldPosition;

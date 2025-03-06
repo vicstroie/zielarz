@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
     //private variables
     GameObject eraseableElement;
     bool menuIsActive;
-    private List<GameObject> inventoryValues;
+    private GameObject[] inventoryValues;
 
 
     // Start is called before the first frame update
@@ -38,10 +38,19 @@ public class UIManager : MonoBehaviour
                 menu.SetActive(true);
 
                 inventoryValues = this.GetComponent<InventoryManager>().GetInventoryValues();
-                Debug.Log(inventoryValues.Count);
-                for (int i = 0; i < inventory.Count; i++)
+
+
+                for (int i = 0; i < inventoryValues.Length; i++)
                 {
-                    if (inventoryValues[i] != null) inventory[i].GetComponent<RawImage>().texture = inventoryValues[i].GetComponent<SpriteRenderer>().sprite.texture;
+                    if (inventoryValues[i] != null)
+                    {
+                        inventory[i].GetComponent<RawImage>().texture = inventoryValues[i].GetComponent<SpriteRenderer>().sprite.texture;
+                        inventory[i].GetComponent<RawImage>().color = new Color(1, 1, 1, 1);
+                    }
+                    else {
+                        inventory[i].GetComponent<RawImage>().texture = null;
+                        inventory[i].GetComponent<RawImage>().color = new Color(0.22f, 0.22f, 0.22f, 0.55f);
+                    } 
                 }
             }
             

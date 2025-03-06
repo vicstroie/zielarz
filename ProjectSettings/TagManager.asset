@@ -12,11 +12,12 @@ TagManager:
   - DryingRack
   - Crafting
   - Butcher
+  - Rabbit
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Selectable
   - Water
   - UI
   - Plants

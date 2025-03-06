@@ -7,6 +7,7 @@ public class SelectionBehavior : MonoBehaviour
 {
 
     [SerializeField] GameObject playerCamera;
+    [SerializeField] LayerMask layerMask;
 
     private Transform _selection;
     private bool isLooking;
@@ -33,17 +34,17 @@ public class SelectionBehavior : MonoBehaviour
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
         Debug.DrawRay(ray.origin, ray.direction * 5);
-        if (Physics.Raycast(ray, out hit, 5))
+        if (Physics.Raycast(ray, out hit, 5, layerMask))
         {
             var selection = hit.transform;
             var selectionRenderer = selection.GetComponent<Renderer>();
 
-            if (selection.CompareTag("Selectable") || selection.CompareTag("Plant") || selection.CompareTag("DryingRack") || selection.CompareTag("Crafting") || selection.CompareTag("Butcher"))
-            {
+            //if (selection.CompareTag("Selectable") || selection.CompareTag("Plant") || selection.CompareTag("DryingRack") || selection.CompareTag("Crafting") || selection.CompareTag("Butcher"))
+            //{
                 isLooking = true;
                 _selection = selection;
                 Debug.Log("looking!");
-            }
+            //}
 
         }
 
@@ -77,17 +78,15 @@ public class SelectionBehavior : MonoBehaviour
                 } else if(_selection.CompareTag("DryingRack"))
                 {
 
-                    if (!_selection.GetComponent<DryingRackBehavior>().InventoryIsFull()) Debug.Log("notfull!");
-                    if (!this.GetComponent<InventoryManager>().InventoryIsEmpty()) Debug.Log("notempty!");
-
-
+                    //if (!_selection.GetComponent<DryingRackBehavior>().InventoryIsFull()) Debug.Log("notfull!");
+                    //if (!this.GetComponent<InventoryManager>().DoesHaveFlowers()) Debug.Log("hasFlowers!");
 
                     //Checks if DryingRack is full, and if inventory is empty
                     if(!_selection.GetComponent<DryingRackBehavior>().InventoryIsFull() && !this.GetComponent<InventoryManager>().InventoryIsEmpty())
                     {
                         Debug.Log("dryingRack!");
                         //Adds last addition to inventory to dryingrack
-                        if(this.GetComponent<InventoryManager>().DoesLastObjectExist()) _selection.GetComponent<DryingRackBehavior>().AddToInventory(this.GetComponent<InventoryManager>().RetrieveLastObject());
+                        if(this.GetComponent<InventoryManager>().DoesHaveFlowers()) _selection.GetComponent<DryingRackBehavior>().AddToInventory(this.GetComponent<InventoryManager>().GetLastFlower());
                     }
                 } else if(_selection.CompareTag("Crafting"))
                 {
@@ -98,9 +97,22 @@ public class SelectionBehavior : MonoBehaviour
                 {
                     Debug.Log("isCrafting");
                     _selection.GetComponent<ButcherBehavior>().StartChop(playerCamera, this.gameObject);
+                } else if(_selection.CompareTag("Rabbit"))
+                {
+                    if (!this.GetComponent<InventoryManager>().InventoryIsFull())
+                    {
+                        
+                        this.GetComponent<InventoryManager>().AddToInventory(_selection.gameObject);
+                        _selection = null;
+                    }
+                    else
+                    {
+                        //Warn Player that Basket is Full
+                        this.GetComponent<UIManager>().WarnFullBasket();
+                    }
                 }
 
-                //Destroy(_selection.gameObject);
+                _selection = null;
             }
 
         }
