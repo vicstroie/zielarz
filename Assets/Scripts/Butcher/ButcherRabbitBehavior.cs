@@ -6,8 +6,7 @@ using UnityEngine.Rendering;
 
 public class ButcherRabbitBehavior : MonoBehaviour
 {
-
-
+    [SerializeField] Transform legTransform;
     [SerializeField] Sprite cutLeg;
     [SerializeField] GameObject bloodParticles1;
     [SerializeField] GameObject bloodParticles2;
@@ -16,7 +15,6 @@ public class ButcherRabbitBehavior : MonoBehaviour
     Camera cam;
     Vector3 screenPosition;
     Vector3 worldPosition;
-
     Vector3 legPosition;
 
     int cutCount;
@@ -26,7 +24,7 @@ public class ButcherRabbitBehavior : MonoBehaviour
     {
         cam = Camera.main;
         cutCount = 0;
-        legPosition = new Vector3(-82.7f, 20.4f, -25.3f);
+        legPosition = legTransform.position;
     }
 
     // Update is called once per frame
