@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using StarterAssets;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 public class ButcherBehavior : MonoBehaviour
 {
 
-    [SerializeField] Transform craftingCamPos;
+    [SerializeField] GameObject craftingCam;
     [SerializeField] GameObject backButton;
     [SerializeField] GameObject butcherRabbit;
     [SerializeField] GameObject hand;
@@ -32,6 +33,7 @@ public class ButcherBehavior : MonoBehaviour
     {
         if (isMovingCamera)
         {
+            /*
             playerCamera.transform.position = Vector3.Lerp(playerCamera.transform.position, craftingCamPos.position, 0.5f);
             playerCamera.transform.rotation = Quaternion.Lerp(playerCamera.transform.rotation, craftingCamPos.rotation, 0.5f);
             if (playerCamera.transform.position == craftingCamPos.position) {
@@ -39,19 +41,19 @@ public class ButcherBehavior : MonoBehaviour
                 backButton.SetActive(true);
                 Cursor.lockState = CursorLockMode.None;
                 butcherRabbit.SetActive(true);
-            } 
+            }  */
+
+            craftingCam.GetComponent<CinemachineVirtualCamera>().Priority = 100;
+            isMovingCamera = false;
+            backButton.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            butcherRabbit.SetActive(true);
         }
-        /* else
-        {
-            if (Input.GetKeyDown(KeyCode.Backspace))
-            {
-                isMovingCameraBack = true;
-                
-            }
-        } */
+       
 
         if (isMovingCameraBack)
         {
+            /*
             playerCamera.transform.position = Vector3.Lerp(playerCamera.transform.position, originalPlayerCameraPosition, 0.5f);
             playerCamera.transform.rotation = Quaternion.Lerp(playerCamera.transform.rotation, originalPlayerCameraRotation, 0.5f);
             if (playerCamera.transform.position == originalPlayerCameraPosition)
@@ -59,9 +61,17 @@ public class ButcherBehavior : MonoBehaviour
                 isMovingCameraBack = false;
                 Cursor.lockState = CursorLockMode.Locked;
                 backButton.SetActive(false);
-                playerObject.GetComponent<FirstPersonController>().enabled = true;
+                 playerObject.GetComponent<FirstPersonController>().enabled = true;
                 hand.SetActive(true);
             }
+            */
+
+            craftingCam.GetComponent<CinemachineVirtualCamera>().Priority = 10;
+            isMovingCameraBack = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            backButton.SetActive(false);
+            playerObject.GetComponent<FirstPersonController>().enabled = true;
+            hand.SetActive(true);
         }
     }
 

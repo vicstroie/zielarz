@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject fullBasketWarning;
     [SerializeField] GameObject menu;
     [SerializeField] GameObject hand;
+    [SerializeField] GameObject leftHand;
     [SerializeField] List<GameObject> inventory;
 
     [Header("Sprites")]
@@ -18,6 +19,7 @@ public class UIManager : MonoBehaviour
     //private variables
     GameObject eraseableElement;
     bool menuIsActive;
+    bool leftHandIsActive;
     private GameObject[] inventoryValues;
 
 
@@ -27,14 +29,16 @@ public class UIManager : MonoBehaviour
         fullBasketWarning.SetActive(false);
         menuIsActive = false;
         menu.SetActive(false);
+        leftHandIsActive = false;
+        leftHand.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E)) {
+        if (Input.GetKeyDown(KeyCode.E) && !leftHandIsActive) {
             menuIsActive = !menuIsActive;
-            if (menuIsActive) menu.SetActive(false); else {
+            if (!menuIsActive) menu.SetActive(false); else {
                 menu.SetActive(true);
 
                 inventoryValues = this.GetComponent<InventoryManager>().GetInventoryValues();
@@ -55,6 +59,16 @@ public class UIManager : MonoBehaviour
             }
             
         }
+
+        if(Input.GetKeyDown(KeyCode.Q) && !menuIsActive)
+        {
+            leftHandIsActive = !leftHandIsActive;
+            if (leftHandIsActive) leftHand.SetActive(true);
+            else {
+                    leftHand.SetActive(false);
+                }
+
+            }
     }
 
     public void WarnFullBasket()
