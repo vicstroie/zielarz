@@ -77,17 +77,35 @@ public class ButcherBehavior : MonoBehaviour
 
     public void StartChop(GameObject passedCamera, GameObject player)
     {
+        /*
         isMovingCamera = true;
         playerCamera = passedCamera;
         originalPlayerCameraPosition = passedCamera.transform.position;
         originalPlayerCameraRotation = passedCamera.transform.rotation;
+        */
         player.GetComponent<FirstPersonController>().enabled = false;
         playerObject = player;
         hand.SetActive(false);
+
+        craftingCam.GetComponent<CinemachineVirtualCamera>().Priority = 100;
+        isMovingCamera = false;
+        backButton.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        butcherRabbit.SetActive(true);
+
     }
 
     public void EndChop()
     {
-        isMovingCameraBack = true;
+        //isMovingCameraBack = true;
+
+        craftingCam.GetComponent<CinemachineVirtualCamera>().Priority = 10;
+        Cursor.lockState = CursorLockMode.Locked;
+        backButton.SetActive(false);
+        playerObject.GetComponent<FirstPersonController>().enabled = true;
+        hand.SetActive(true);
     }
+
+
+
 }
