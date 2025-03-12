@@ -12,13 +12,16 @@ public class ButcherRabbitBehavior : MonoBehaviour
     [SerializeField] GameObject bloodParticles2;
     [SerializeField] GameObject bloodParticles3;
 
+    //private
     Camera cam;
     GameObject player;
     Vector3 screenPosition;
     Vector3 worldPosition;
     Vector3 legPosition;
-
     int cutCount;
+
+    //public
+    public bool knifeIsOver;
 
     // Start is called before the first frame update
     void Start()
@@ -41,28 +44,37 @@ public class ButcherRabbitBehavior : MonoBehaviour
             worldPosition = hitData.point;
         }
 
-        if(worldPosition.x < legPosition.x + 0.5f && worldPosition.x > legPosition.x - 0.5f
-            && worldPosition.y < legPosition.y + 0.5f && worldPosition.y > legPosition.y - 0.5f
-            && Input.GetMouseButtonDown(0) && cutCount < 3)
-        {
-            switch(cutCount)
-            {
-                case 0:
-                    bloodParticles1.SetActive(true);
-                    break;
-                case 1:
-                    bloodParticles2.SetActive(true);
-                    break;
-                case 2:
-                    bloodParticles3.SetActive(true);
-                    this.GetComponent<SpriteRenderer>().sprite = cutLeg;
-                    player.gameObject.GetComponent<UIManager>().ActivateHandElements(0);
-                    break;
-                default:
-                    break;
-            }
+        knifeIsOver = false;
 
-            cutCount++;
+        if(worldPosition.x < legPosition.x + 0.2f && worldPosition.x > legPosition.x - 0.2f
+            && worldPosition.y < legPosition.y + 0.2f && worldPosition.y > legPosition.y - 0.2f)
+        {
+            knifeIsOver = true;
+
+            if(Input.GetMouseButtonDown(0) && cutCount < 3)
+            {
+                switch (cutCount)
+                {
+                    case 0:
+                        bloodParticles1.SetActive(true);
+                        SoundSystem.instance.PlaySound("stab1");
+                        break;
+                    case 1:
+                        bloodParticles2.SetActive(true);
+                        SoundSystem.instance.PlaySound("stab2");
+                        break;
+                    case 2:
+                        bloodParticles3.SetActive(true);
+                        this.GetComponent<SpriteRenderer>().sprite = cutLeg;
+                        player.gameObject.GetComponent<UIManager>().ActivateHandElements(0);
+                        SoundSystem.instance.PlaySound("stab3");
+                        break;
+                    default:
+                        break;
+                }
+
+                cutCount++;
+            }
             
         }
 

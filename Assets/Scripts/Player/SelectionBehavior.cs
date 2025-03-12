@@ -77,10 +77,6 @@ public class SelectionBehavior : MonoBehaviour
                     }
                 } else if(_selection.CompareTag("DryingRack"))
                 {
-
-                    //if (!_selection.GetComponent<DryingRackBehavior>().InventoryIsFull()) Debug.Log("notfull!");
-                    //if (!this.GetComponent<InventoryManager>().DoesHaveFlowers()) Debug.Log("hasFlowers!");
-
                     //Checks if DryingRack is full, and if inventory is empty
                     if(!_selection.GetComponent<DryingRackBehavior>().InventoryIsFull() && !this.GetComponent<InventoryManager>().InventoryIsEmpty())
                     {
@@ -101,7 +97,7 @@ public class SelectionBehavior : MonoBehaviour
                 {
                     if (!this.GetComponent<InventoryManager>().InventoryIsFull())
                     {
-                        
+                        SoundSystem.instance.PlaySound("rabbitGrab");
                         this.GetComponent<InventoryManager>().AddToInventory(_selection.gameObject);
                         _selection = null;
                     }
