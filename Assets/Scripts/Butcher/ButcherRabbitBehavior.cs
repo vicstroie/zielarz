@@ -13,6 +13,7 @@ public class ButcherRabbitBehavior : MonoBehaviour
     [SerializeField] GameObject bloodParticles3;
 
     Camera cam;
+    GameObject player;
     Vector3 screenPosition;
     Vector3 worldPosition;
     Vector3 legPosition;
@@ -25,6 +26,7 @@ public class ButcherRabbitBehavior : MonoBehaviour
         cam = Camera.main;
         cutCount = 0;
         legPosition = legTransform.position;
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -54,6 +56,7 @@ public class ButcherRabbitBehavior : MonoBehaviour
                 case 2:
                     bloodParticles3.SetActive(true);
                     this.GetComponent<SpriteRenderer>().sprite = cutLeg;
+                    player.gameObject.GetComponent<UIManager>().ActivateHandElements(0);
                     break;
                 default:
                     break;

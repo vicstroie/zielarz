@@ -96,7 +96,7 @@ public class SelectionBehavior : MonoBehaviour
                 else if (_selection.CompareTag("Butcher"))
                 {
                     Debug.Log("isCrafting");
-                    _selection.GetComponent<ButcherBehavior>().StartChop(playerCamera, this.gameObject);
+                    _selection.GetComponent<ButcherBehavior>().StartChop(playerCamera, this.gameObject, this.GetComponent<InventoryManager>().CheckForRabbit());
                 } else if(_selection.CompareTag("Rabbit"))
                 {
                     if (!this.GetComponent<InventoryManager>().InventoryIsFull())

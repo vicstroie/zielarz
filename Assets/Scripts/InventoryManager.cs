@@ -107,15 +107,27 @@ public class InventoryManager : MonoBehaviour
         return flowerReturn;
 
     }
-
-
-    
     public void RemoveFromInventory()
     {
         if(!InventoryIsEmpty())
         {
             inventory[lastAddedIndex - 1] = null;
         }
+    }
+
+    public bool CheckForRabbit()
+    {
+        for (int i = 0; i < maxCapacity; i++)
+        {
+            if (inventory[i] != null && inventory[i].CompareTag("Rabbit"))
+            {
+                inventory[i] = null;
+                return true;
+            }
+
+        }
+
+        return false;
     }
 
     public GameObject[] GetInventoryValues()

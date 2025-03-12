@@ -11,6 +11,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject hand;
     [SerializeField] GameObject leftHand;
     [SerializeField] List<GameObject> inventory;
+    [SerializeField] List<GameObject> leftHandItems;
+    [SerializeField] List<Sprite> leftHandSprites;
 
     [Header("Sprites")]
     [SerializeField] Sprite idle;
@@ -95,4 +97,10 @@ public class UIManager : MonoBehaviour
     {
         hand.GetComponent<Image>().sprite = idle;
     }
+
+    public void ActivateHandElements(int handInt)
+    {
+        leftHandItems[handInt].GetComponent<Image>().sprite = leftHandSprites[handInt];
+        leftHandItems[handInt].GetComponent<Image>().color = Color.white;
+    } 
 }
