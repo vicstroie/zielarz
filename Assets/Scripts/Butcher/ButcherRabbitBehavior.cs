@@ -22,6 +22,7 @@ public class ButcherRabbitBehavior : MonoBehaviour
 
     //public
     public bool knifeIsOver;
+    public GameObject butcherBehavior;
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +54,8 @@ public class ButcherRabbitBehavior : MonoBehaviour
 
             if(Input.GetMouseButtonDown(0) && cutCount < 3)
             {
+                butcherBehavior.GetComponent<ButcherBehavior>().ChopAnimation();
+
                 switch (cutCount)
                 {
                     case 0:

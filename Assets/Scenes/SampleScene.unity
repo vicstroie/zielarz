@@ -180925,6 +180925,7 @@ MonoBehaviour:
   bloodParticles2: {fileID: 267081558}
   bloodParticles3: {fileID: 1378931410}
   knifeIsOver: 0
+  butcherBehavior: {fileID: 0}
 --- !u!1 &1233110613
 GameObject:
   m_ObjectHideFlags: 0
@@ -280606,6 +280607,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2040302164}
   - component: {fileID: 2040302163}
+  - component: {fileID: 2040302165}
   m_Layer: 0
   m_Name: KnifeHand
   m_TagString: Untagged
@@ -280680,6 +280682,27 @@ Transform:
   m_Children: []
   m_Father: {fileID: 972006189}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!95 &2040302165
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040302162}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2de0377659ba82244a5a2c818ef4232a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &2042135108
 PrefabInstance:
   m_ObjectHideFlags: 0

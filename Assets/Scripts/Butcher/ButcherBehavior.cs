@@ -19,10 +19,10 @@ public class ButcherBehavior : MonoBehaviour
     [SerializeField] Sprite knifeReady;
     [SerializeField] Sprite knifeIdle;
 
-    bool isMovingCamera;
-    bool isMovingCameraBack;
+    bool isChopping;
     GameObject playerCamera;
     GameObject playerObject;
+    Animator chopAnim;
 
     Vector3 originalPlayerCameraPosition;
     Quaternion originalPlayerCameraRotation;
@@ -33,13 +33,21 @@ public class ButcherBehavior : MonoBehaviour
         backButton.SetActive(false);
         butcherRabbit.SetActive(false);
         mouseTracker.SetActive(false);
+        chopAnim = knifeHand.GetComponent<Animator>();
+        chopAnim.SetBool("isChopping", false);
+        isChopping = false;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (butcherRabbit.GetComponent<ButcherRabbitBehavior>().knifeIsOver) knifeHand.GetComponent<SpriteRenderer>().sprite = knifeReady; 
-        else knifeHand.GetComponent<SpriteRenderer>().sprite = knifeIdle;
+
+        if(!isChopping)
+        {
+            if (butcherRabbit.GetComponent<ButcherRabbitBehavior>().knifeIsOver) knifeHand.GetComponent<SpriteRenderer>().sprite = knifeReady;
+            else knifeHand.GetComponent<SpriteRenderer>().sprite = knifeIdle;
+        }
 
     }
 
@@ -53,9 +61,12 @@ public class ButcherBehavior : MonoBehaviour
         hand.SetActive(false);
         backButton.SetActive(true);
         mouseTracker.SetActive(true);
-        
 
-        if(canStart) butcherRabbit.SetActive(true);
+
+        if (canStart) {
+            butcherRabbit.SetActive(true);
+            butcherRabbit.GetComponent<ButcherRabbitBehavior>().butcherBehavior = this.gameObject;
+        } 
 
     }
 
@@ -71,6 +82,17 @@ public class ButcherBehavior : MonoBehaviour
         mouseTracker.SetActive(false);
     }
 
+    public void ChopAnimation()
+    {
+        isChopping = true;
+        chopAnim.SetBool("isChopping", true);
+        Invoke("EndChopAnimation", 0.15f);
+    }
 
+    void EndChopAnimation()
+    {
+        isChopping = false;
+        chopAnim.SetBool("isChopping", false);
+    }
 
 }
