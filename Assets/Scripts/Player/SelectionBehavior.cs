@@ -43,7 +43,7 @@ public class SelectionBehavior : MonoBehaviour
             //{
                 isLooking = true;
                 _selection = selection;
-                Debug.Log("looking!");
+                //Debug.Log("looking!");
             //}
 
         }

@@ -33,8 +33,11 @@ public class ButcherBehavior : MonoBehaviour
         backButton.SetActive(false);
         butcherRabbit.SetActive(false);
         mouseTracker.SetActive(false);
+        /*
         chopAnim = knifeHand.GetComponent<Animator>();
         chopAnim.SetBool("isChopping", false);
+        chopAnim.SetBool("knifeIsOver", false);
+        */
         isChopping = false;
         
     }
@@ -45,8 +48,16 @@ public class ButcherBehavior : MonoBehaviour
 
         if(!isChopping)
         {
-            if (butcherRabbit.GetComponent<ButcherRabbitBehavior>().knifeIsOver) knifeHand.GetComponent<SpriteRenderer>().sprite = knifeReady;
-            else knifeHand.GetComponent<SpriteRenderer>().sprite = knifeIdle;
+            if (butcherRabbit.GetComponent<ButcherRabbitBehavior>().knifeIsOver)
+            {
+                //chopAnim.SetBool("isKnifeOver", true);
+                knifeHand.GetComponent<SpriteRenderer>().sprite = knifeReady;
+                Debug.Log("knifeReady");
+            }
+            else {
+                //chopAnim.SetBool("isKnifeOver", false);
+                knifeHand.GetComponent<SpriteRenderer>().sprite = knifeIdle;
+            } 
         }
 
     }
@@ -85,14 +96,14 @@ public class ButcherBehavior : MonoBehaviour
     public void ChopAnimation()
     {
         isChopping = true;
-        chopAnim.SetBool("isChopping", true);
+        //chopAnim.SetBool("isChopping", true);
         Invoke("EndChopAnimation", 0.15f);
     }
 
     void EndChopAnimation()
     {
         isChopping = false;
-        chopAnim.SetBool("isChopping", false);
+        //chopAnim.SetBool("isChopping", false);
     }
 
 }

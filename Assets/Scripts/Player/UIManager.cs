@@ -12,11 +12,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject leftHand;
     [SerializeField] List<GameObject> inventory;
     [SerializeField] List<GameObject> leftHandItems;
+    [SerializeField] List<GameObject> leftHandMagicSpots;
     [SerializeField] List<Sprite> leftHandSprites;
+    [SerializeField] List<GameObject> redLines;
 
     [Header("Sprites")]
     [SerializeField] Sprite idle;
     [SerializeField] Sprite grabbing;
+    [SerializeField] Sprite magicSpotDone;
 
     //private variables
     GameObject eraseableElement;
@@ -33,6 +36,10 @@ public class UIManager : MonoBehaviour
         menu.SetActive(false);
         leftHandIsActive = false;
         leftHand.SetActive(false);
+
+        for (int i = 0; i < redLines.Count; i++) {
+            redLines[i].SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -102,5 +109,7 @@ public class UIManager : MonoBehaviour
     {
         leftHandItems[handInt].GetComponent<Image>().sprite = leftHandSprites[handInt];
         leftHandItems[handInt].GetComponent<Image>().color = Color.white;
+        leftHandMagicSpots[handInt].GetComponent<Image>().sprite = magicSpotDone;
+        redLines[handInt].SetActive(true);
     } 
 }

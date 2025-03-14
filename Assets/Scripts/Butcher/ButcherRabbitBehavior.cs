@@ -45,7 +45,7 @@ public class ButcherRabbitBehavior : MonoBehaviour
             worldPosition = hitData.point;
         }
 
-        knifeIsOver = false;
+        
 
         if(worldPosition.x < legPosition.x + 0.2f && worldPosition.x > legPosition.x - 0.2f
             && worldPosition.y < legPosition.y + 0.2f && worldPosition.y > legPosition.y - 0.2f)
@@ -54,7 +54,7 @@ public class ButcherRabbitBehavior : MonoBehaviour
 
             if(Input.GetMouseButtonDown(0) && cutCount < 3)
             {
-                butcherBehavior.GetComponent<ButcherBehavior>().ChopAnimation();
+                //butcherBehavior.GetComponent<ButcherBehavior>().ChopAnimation();
 
                 switch (cutCount)
                 {
@@ -79,7 +79,7 @@ public class ButcherRabbitBehavior : MonoBehaviour
                 cutCount++;
             }
             
-        }
+        } else knifeIsOver = false;
 
         //Vector3 mousePos = worldPosition;
         //Debug.Log("X:" + mousePos.x + "Y:" + mousePos.y + "Z:" + mousePos.z);
