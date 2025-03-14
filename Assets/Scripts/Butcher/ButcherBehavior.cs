@@ -52,7 +52,6 @@ public class ButcherBehavior : MonoBehaviour
             {
                 //chopAnim.SetBool("isKnifeOver", true);
                 knifeHand.GetComponent<SpriteRenderer>().sprite = knifeReady;
-                Debug.Log("knifeReady");
             }
             else {
                 //chopAnim.SetBool("isKnifeOver", false);
