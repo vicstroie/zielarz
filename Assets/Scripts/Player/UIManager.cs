@@ -21,11 +21,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] Sprite idle;
     [SerializeField] Sprite grabbing;
     [SerializeField] Sprite magicSpotDone;
+    [SerializeField] Sprite magicSpotWaiting;
 
     //private variables
     GameObject eraseableElement;
     bool menuIsActive;
     bool leftHandIsActive;
+    bool isLookingAtSomething;
     private GameObject[] inventoryValues;
 
 
@@ -85,9 +87,17 @@ public class UIManager : MonoBehaviour
             else {
                     leftHand.SetActive(false);
                     ActivateSelection();
-                }
-
             }
+
+        }
+
+        if(isLookingAtSomething )
+        {
+            selectionMarker.GetComponent<Image>().sprite = magicSpotDone;
+        } else 
+        {
+            selectionMarker.GetComponent<Image>().sprite = magicSpotWaiting;
+        }
     }
 
     public void WarnFullBasket()
@@ -133,6 +143,11 @@ public class UIManager : MonoBehaviour
     public void DeactivateSelection()
     {
         selectionMarker.SetActive(false);
+    }
+
+    public void SetSelector(bool value)
+    {
+        isLookingAtSomething = value;
     }
 
 }

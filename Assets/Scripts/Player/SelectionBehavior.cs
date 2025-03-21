@@ -24,12 +24,9 @@ public class SelectionBehavior : MonoBehaviour
         if (_selection != null)
         {
             _selection = null;
-        }
-        else
-        {
-            //While not selected
             isLooking = false;
         }
+        
 
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -48,9 +45,13 @@ public class SelectionBehavior : MonoBehaviour
 
         }
 
+        
+        this.GetComponent<UIManager>().SetSelector(isLooking); //passes isLooking to UIManager
+
 
         if (isLooking)
         {
+            
             if (Input.GetMouseButtonDown(0) && _selection != null)
             {
 

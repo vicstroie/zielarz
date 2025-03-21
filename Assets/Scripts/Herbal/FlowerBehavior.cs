@@ -19,8 +19,8 @@ public class FlowerBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isHeld && mouseTracker.transform.position.x > -100 && mouseTracker.transform.position.x < -98
-            && mouseTracker.transform.position.z > -53 && mouseTracker.transform.position.z < -51)
+        if(isHeld && mouseTracker.transform.position.x > -102 && mouseTracker.transform.position.x < -98
+            && mouseTracker.transform.position.z > -55 && mouseTracker.transform.position.z < -51)
         {
             this.transform.position = new Vector3(mouseTracker.transform.position.x, this.transform.position.y, mouseTracker.transform.position.z);
         }
