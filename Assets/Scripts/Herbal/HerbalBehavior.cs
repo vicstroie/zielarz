@@ -1,0 +1,75 @@
+using System.Collections;
+using System.Collections.Generic;
+using Cinemachine;
+using StarterAssets;
+using Unity.VisualScripting;
+using UnityEngine;
+
+public class HerbalBehavior : MonoBehaviour
+{
+
+    [Header("GameObjects")]
+    [SerializeField] GameObject craftingCam;
+    [SerializeField] GameObject backButton;
+    [SerializeField] GameObject mortarPestle;
+    [SerializeField] GameObject hand;
+    [SerializeField] GameObject grabHand;
+    [SerializeField] GameObject mouseTracker;
+
+    public bool isHoldingFlower;
+
+    //private
+    GameObject playerObject;
+    GameObject heldFlower;
+
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        //mortarPestle.SetActive(false);
+        mouseTracker.SetActive(false);
+        backButton.SetActive(false);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+
+    public void StartCraft(GameObject player) {
+
+        craftingCam.GetComponent<CinemachineVirtualCamera>().Priority = 100;
+        player.GetComponent<FirstPersonController>().enabled = false;
+        player.GetComponent<SelectionBehavior>().enabled = false;
+
+        playerObject = player;
+        
+        Cursor.lockState = CursorLockMode.None;
+
+        hand.SetActive(false);
+        mouseTracker.SetActive(true);
+        backButton.SetActive(true);
+    }
+
+    public void StopCraft()
+    {
+        craftingCam.GetComponent<CinemachineVirtualCamera>().Priority = 10;
+        playerObject.GetComponent<FirstPersonController>().enabled = true;
+        playerObject.GetComponent<SelectionBehavior>().enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+
+
+        backButton.SetActive(false);
+        hand.SetActive(true);
+        mouseTracker.SetActive(false);
+    }
+
+    public void HoldFlower(GameObject flower)
+    {
+        isHoldingFlower = true;
+        heldFlower = flower;
+
+    }
+}

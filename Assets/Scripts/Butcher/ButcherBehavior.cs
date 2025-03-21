@@ -30,9 +30,9 @@ public class ButcherBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        backButton.SetActive(false);
         butcherRabbit.SetActive(false);
         mouseTracker.SetActive(false);
+        backButton.SetActive(false);
         /*
         chopAnim = knifeHand.GetComponent<Animator>();
         chopAnim.SetBool("isChopping", false);
@@ -65,12 +65,14 @@ public class ButcherBehavior : MonoBehaviour
     {
         craftingCam.GetComponent<CinemachineVirtualCamera>().Priority = 100;
         player.GetComponent<FirstPersonController>().enabled = false;
+        player.GetComponent<SelectionBehavior>().enabled = false;
         playerObject = player;
+        
         Cursor.lockState = CursorLockMode.None; 
 
         hand.SetActive(false);
-        backButton.SetActive(true);
         mouseTracker.SetActive(true);
+        backButton.SetActive(true);
 
 
         if (canStart) {
@@ -84,12 +86,13 @@ public class ButcherBehavior : MonoBehaviour
     {
         craftingCam.GetComponent<CinemachineVirtualCamera>().Priority = 10;
         playerObject.GetComponent<FirstPersonController>().enabled = true;
+        playerObject.GetComponent<SelectionBehavior>().enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         
 
-        backButton.SetActive(false);
         hand.SetActive(true);
         mouseTracker.SetActive(false);
+        backButton.SetActive(false);
     }
 
     public void ChopAnimation()

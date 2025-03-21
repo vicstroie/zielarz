@@ -13,6 +13,9 @@ TagManager:
   - Crafting
   - Butcher
   - Rabbit
+  - Laser
+  - Enemy
+  - Herb
   layers:
   - Default
   - TransparentFX

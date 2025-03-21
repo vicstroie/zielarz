@@ -48,7 +48,7 @@ public class ButcherRabbitBehavior : MonoBehaviour
         
 
         if(worldPosition.x < legPosition.x + 0.2f && worldPosition.x > legPosition.x - 0.2f
-            && worldPosition.y < legPosition.y + 0.2f && worldPosition.y > legPosition.y - 0.2f)
+            && worldPosition.z < legPosition.z + 0.2f && worldPosition.z > legPosition.z - 0.2f)
         {
             knifeIsOver = true;
 

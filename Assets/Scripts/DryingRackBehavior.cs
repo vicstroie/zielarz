@@ -7,6 +7,9 @@ public class DryingRackBehavior : MonoBehaviour
     //Contents of the Inventory
     public GameObject[] contents;
 
+    //GameObjects
+    [SerializeField] GameObject tableBasket;
+
     [Header("Changeable Variables")]
     [SerializeField] int maxCapacity;
 
@@ -48,11 +51,17 @@ public class DryingRackBehavior : MonoBehaviour
 
         contents[emptyPosition] = item;
         item.GetComponent<BillboardEffect>().enabled = false;
-        item.GetComponent<PlantBehavior>().isPickable = false;
+        item.GetComponent<PlantBehavior>().PutOnRack(this.gameObject, emptyPosition); //might have problems here
         item.transform.position = new Vector3(this.transform.position.x + 0.67f, this.transform.position.y - 0.91f, (this.transform.position.z + 2f) - emptyPosition);
         item.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
         item.transform.eulerAngles = new Vector3(0, 90, 180);
         item.GetComponent<SpriteRenderer>().enabled = true;
         item.GetComponent<BoxCollider>().enabled = true;
+    }
+
+    public void SendFlowerToTable(int index)
+    {
+        tableBasket.GetComponent<HerbalBasketBehavior>().AddToBasket();
+        Destroy(contents[index].gameObject);
     }
 }

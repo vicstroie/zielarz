@@ -10,6 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject menu;
     [SerializeField] GameObject hand;
     [SerializeField] GameObject leftHand;
+    [SerializeField] GameObject selectionMarker;
     [SerializeField] List<GameObject> inventory;
     [SerializeField] List<GameObject> leftHandItems;
     [SerializeField] List<GameObject> leftHandMagicSpots;
@@ -37,6 +38,7 @@ public class UIManager : MonoBehaviour
         leftHandIsActive = false;
         leftHand.SetActive(false);
 
+
         for (int i = 0; i < redLines.Count; i++) {
             redLines[i].SetActive(false);
         }
@@ -47,8 +49,12 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E) && !leftHandIsActive) {
             menuIsActive = !menuIsActive;
-            if (!menuIsActive) menu.SetActive(false); else {
+            if (!menuIsActive) {
+                menu.SetActive(false);
+                ActivateSelection();
+            }  else {
                 menu.SetActive(true);
+                DeactivateSelection();
 
                 inventoryValues = this.GetComponent<InventoryManager>().GetInventoryValues();
 
@@ -72,9 +78,13 @@ public class UIManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Q) && !menuIsActive)
         {
             leftHandIsActive = !leftHandIsActive;
-            if (leftHandIsActive) leftHand.SetActive(true);
+            if (leftHandIsActive) {
+                leftHand.SetActive(true);
+                DeactivateSelection();
+            } 
             else {
                     leftHand.SetActive(false);
+                    ActivateSelection();
                 }
 
             }
@@ -85,12 +95,14 @@ public class UIManager : MonoBehaviour
         fullBasketWarning.SetActive(true);
         eraseableElement = fullBasketWarning;
         Invoke("EraseElement", 0.75f);
+        DeactivateSelection();
         
     }
 
     public void EraseElement()
     {
         eraseableElement.SetActive(false);
+        ActivateSelection();
     }
 
     public void Grab()
@@ -112,4 +124,15 @@ public class UIManager : MonoBehaviour
         leftHandMagicSpots[handInt].GetComponent<Image>().sprite = magicSpotDone;
         redLines[handInt].SetActive(true);
     } 
+
+    public void ActivateSelection()
+    {
+        selectionMarker.SetActive(true);
+    }
+
+    public void DeactivateSelection()
+    {
+        selectionMarker.SetActive(false);
+    }
+
 }

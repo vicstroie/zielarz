@@ -87,7 +87,7 @@ public class SelectionBehavior : MonoBehaviour
                 } else if(_selection.CompareTag("Crafting"))
                 {
                     Debug.Log("isCrafting");
-                    _selection.GetComponent<CraftingBehavior>().StartCraft(playerCamera, this.gameObject);
+                    _selection.GetComponent<HerbalBehavior>().StartCraft(this.gameObject);
                 }
                 else if (_selection.CompareTag("Butcher"))
                 {
