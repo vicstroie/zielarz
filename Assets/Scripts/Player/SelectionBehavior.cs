@@ -117,9 +117,10 @@ public class SelectionBehavior : MonoBehaviour
                         this.GetComponent<UIManager>().WarnFullBasket();
                     }
                 }
-                else if (_selection.CompareTag("Villager") && gameManager.GetComponent<GameManager>().isTalking) {
+                else if (_selection.CompareTag("Villager") && !gameManager.GetComponent<GameManager>().isTalking) {
 
                     flowchart.SendFungusMessage(_selection.GetComponent<VillagerInfo>().villagerName);
+                    Debug.Log("talked!");
 
                 }
 
