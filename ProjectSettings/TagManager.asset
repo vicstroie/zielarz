@@ -16,6 +16,7 @@ TagManager:
   - Laser
   - Enemy
   - Herb
+  - Villager
   layers:
   - Default
   - TransparentFX

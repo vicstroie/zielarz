@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Fungus;
 using TMPro;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ public class SelectionBehavior : MonoBehaviour
 {
 
     [SerializeField] GameObject playerCamera;
+    [SerializeField] Flowchart flowchart;
+    [SerializeField] GameObject gameManager;
     [SerializeField] LayerMask layerMask;
 
     private Transform _selection;
@@ -58,34 +61,39 @@ public class SelectionBehavior : MonoBehaviour
                 this.GetComponent<UIManager>().Grab();
 
                 //ADD OTHER SELECTABLES HERE
-                if (_selection.CompareTag("Selectable")) {
+                if (_selection.CompareTag("Selectable"))
+                {
 
-                } else if(_selection.CompareTag("Plant")) //IF SELECTED IS PLANT
+                }
+                else if (_selection.CompareTag("Plant")) //IF SELECTED IS PLANT
                 {
                     //CHECKS IF INVENTORY IS FULL
-                    if(!this.GetComponent<InventoryManager>().InventoryIsFull())
+                    if (!this.GetComponent<InventoryManager>().InventoryIsFull())
                     {
-                        if(_selection.GetComponent<PlantBehavior>().isPickable)
+                        if (_selection.GetComponent<PlantBehavior>().isPickable)
                         {
                             this.GetComponent<InventoryManager>().AddToInventory(_selection.gameObject);
                             SoundSystem.instance.PlaySound("pickUp");
                             _selection = null;
                         }
-                    } else 
+                    }
+                    else
                     {
                         //Warn Player that Basket is Full
                         this.GetComponent<UIManager>().WarnFullBasket();
                     }
-                } else if(_selection.CompareTag("DryingRack"))
+                }
+                else if (_selection.CompareTag("DryingRack"))
                 {
                     //Checks if DryingRack is full, and if inventory is empty
-                    if(!_selection.GetComponent<DryingRackBehavior>().InventoryIsFull() && !this.GetComponent<InventoryManager>().InventoryIsEmpty())
+                    if (!_selection.GetComponent<DryingRackBehavior>().InventoryIsFull() && !this.GetComponent<InventoryManager>().InventoryIsEmpty())
                     {
                         Debug.Log("dryingRack!");
                         //Adds last addition to inventory to dryingrack
-                        if(this.GetComponent<InventoryManager>().DoesHaveFlowers()) _selection.GetComponent<DryingRackBehavior>().AddToInventory(this.GetComponent<InventoryManager>().GetLastFlower());
+                        if (this.GetComponent<InventoryManager>().DoesHaveFlowers()) _selection.GetComponent<DryingRackBehavior>().AddToInventory(this.GetComponent<InventoryManager>().GetLastFlower());
                     }
-                } else if(_selection.CompareTag("Crafting"))
+                }
+                else if (_selection.CompareTag("Crafting"))
                 {
                     Debug.Log("isCrafting");
                     _selection.GetComponent<HerbalBehavior>().StartCraft(this.gameObject);
@@ -94,7 +102,8 @@ public class SelectionBehavior : MonoBehaviour
                 {
                     Debug.Log("isCrafting");
                     _selection.GetComponent<ButcherBehavior>().StartChop(playerCamera, this.gameObject, this.GetComponent<InventoryManager>().CheckForRabbit());
-                } else if(_selection.CompareTag("Rabbit"))
+                }
+                else if (_selection.CompareTag("Rabbit"))
                 {
                     if (!this.GetComponent<InventoryManager>().InventoryIsFull())
                     {
@@ -107,6 +116,11 @@ public class SelectionBehavior : MonoBehaviour
                         //Warn Player that Basket is Full
                         this.GetComponent<UIManager>().WarnFullBasket();
                     }
+                }
+                else if (_selection.CompareTag("Villager") && gameManager.GetComponent<GameManager>().isTalking) {
+
+                    flowchart.SendFungusMessage(_selection.GetComponent<VillagerInfo>().villagerName);
+
                 }
 
                 _selection = null;
