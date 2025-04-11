@@ -14,6 +14,7 @@ public class MoveVillager : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         agent.destination = villagerDestination.position;
+       // agent.speed *= 2;
     }
 
     // Update is called once per frame
