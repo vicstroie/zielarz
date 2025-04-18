@@ -47,15 +47,15 @@ Material:
     m_Ints: []
     m_Floats:
     - _Color_Burn: 18.7
-    - _Color_Burn_Strength: 0.295
+    - _Color_Burn_Strength: 0
     - _Color_Resolution: 8
-    - _Dither_Opacity: 0.001
+    - _Dither_Opacity: 0
     - _Dither_Spread: 4
     - _Dither_Tiling: 2
-    - _Pixelate: 256.7
+    - _Pixelate: 200
     - _Pixelate_Strength: 1
     - _Steps: 3.63
     m_Colors:
-    - _Pixelate_Scale: {r: 2, g: 1, b: 0, a: 0}
+    - _Pixelate_Scale: {r: 2, g: 2, b: 0, a: 0}
     - _Vector4: {r: 5.38, g: 4, b: 4, a: 4}
   m_BuildTextureStacks: []

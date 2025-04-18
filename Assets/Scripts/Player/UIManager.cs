@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject leftHand;
     [SerializeField] GameObject selectionMarker;
     [SerializeField] List<GameObject> inventory;
+    [SerializeField] List<GameObject> inventoryBackground;
     [SerializeField] List<GameObject> leftHandItems;
     [SerializeField] List<GameObject> leftHandMagicSpots;
     [SerializeField] List<Sprite> leftHandSprites;
@@ -22,6 +23,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] Sprite grabbing;
     [SerializeField] Sprite magicSpotDone;
     [SerializeField] Sprite magicSpotWaiting;
+    [SerializeField] Sprite menuSpotEmpty;
+    [SerializeField] Sprite menuSpotFilled;
 
     //private variables
     GameObject eraseableElement;
@@ -65,12 +68,15 @@ public class UIManager : MonoBehaviour
                 {
                     if (inventoryValues[i] != null)
                     {
-                        inventory[i].GetComponent<RawImage>().texture = inventoryValues[i].GetComponent<SpriteRenderer>().sprite.texture;
+                        inventory[i].GetComponent<RawImage>().texture = inventoryValues[i].GetComponent<ObjectInformation>().menuSprite.texture;
                         inventory[i].GetComponent<RawImage>().color = new Color(1, 1, 1, 1);
+                        inventoryBackground[i].GetComponent<Image>().sprite = menuSpotFilled;
                     }
                     else {
                         inventory[i].GetComponent<RawImage>().texture = null;
-                        inventory[i].GetComponent<RawImage>().color = new Color(0.22f, 0.22f, 0.22f, 0.55f);
+                        inventory[i].GetComponent<RawImage>().color = new Color(1, 1, 1, 0);
+                        inventoryBackground[i].GetComponent<Image>().sprite = menuSpotEmpty;
+
                     } 
                 }
             }
