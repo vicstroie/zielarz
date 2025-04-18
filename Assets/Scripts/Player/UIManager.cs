@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject selectionMarker;
     [SerializeField] List<GameObject> inventory;
     [SerializeField] List<GameObject> inventoryBackground;
+    [SerializeField] List<GameObject> inventoryNames;
+    [SerializeField] List<GameObject> inventoryText;
     [SerializeField] List<GameObject> leftHandItems;
     [SerializeField] List<GameObject> leftHandMagicSpots;
     [SerializeField] List<Sprite> leftHandSprites;
@@ -71,12 +74,15 @@ public class UIManager : MonoBehaviour
                         inventory[i].GetComponent<RawImage>().texture = inventoryValues[i].GetComponent<ObjectInformation>().menuSprite.texture;
                         inventory[i].GetComponent<RawImage>().color = new Color(1, 1, 1, 1);
                         inventoryBackground[i].GetComponent<Image>().sprite = menuSpotFilled;
+                        inventoryNames[i].GetComponent<TextMeshProUGUI>().text = inventoryValues[i].GetComponent<ObjectInformation>().menuName;
+                        inventoryText[i].GetComponent<TextMeshProUGUI>().text = inventoryValues[i].GetComponent<ObjectInformation>().menuText;
                     }
                     else {
                         inventory[i].GetComponent<RawImage>().texture = null;
                         inventory[i].GetComponent<RawImage>().color = new Color(1, 1, 1, 0);
                         inventoryBackground[i].GetComponent<Image>().sprite = menuSpotEmpty;
-
+                        inventoryNames[i].GetComponent<TextMeshProUGUI>().text = "";
+                        inventoryText[i].GetComponent<TextMeshProUGUI>().text = "";
                     } 
                 }
             }

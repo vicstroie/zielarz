@@ -148,5 +148,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   menuSprite: {fileID: 21300000, guid: 8a80647b3ba60d549966871a17c24157, type: 3}
-  menuName: St. John's Wart
+  menuName: Flower
   menuText: So yellow.
