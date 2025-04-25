@@ -249780,7 +249780,7 @@ MonoBehaviour:
   indentLevel: 0
   storyText: Do you promise?
   description: 
-  character: {fileID: 0}
+  character: {fileID: 1541208084}
   portrait: {fileID: 0}
   voiceOverClip: {fileID: 0}
   showAlways: 1
@@ -249805,8 +249805,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nodeRect:
     serializedVersion: 2
-    x: 387.9317
-    y: 303.40732
+    x: 398.91205
+    y: 296.3485
     width: 98.62745
     height: 40
   tint: {r: 1, g: 1, b: 1, a: 1}
@@ -249889,7 +249889,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   parentBlock: {fileID: 1638548106}
   suppressBlockAutoSelect: 0
-  message: 
+  message: Jadwiga
 --- !u!1 &1638551861
 GameObject:
   m_ObjectHideFlags: 0
