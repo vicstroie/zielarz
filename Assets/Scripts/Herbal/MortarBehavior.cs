@@ -12,6 +12,8 @@ public class MortarBehavior : MonoBehaviour
 
     List<GameObject> flowers = new List<GameObject>();
 
+    float rotateCount;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +43,19 @@ public class MortarBehavior : MonoBehaviour
             if (flowers.Count == 5 && Input.GetMouseButton(0))
             {
                 pestle.transform.Rotate(0, 1, 0);
+                rotateCount += Time.deltaTime;
+
+                if(rotateCount > 5)
+                {
+                    herbalBehavior.GetComponent<HerbalBehavior>().CompletedTea();
+                    
+                    for (int i = 0; i < 5; i++) {
+                        Destroy(flowers[i].gameObject);
+                    }
+                    flowers.Clear();
+
+                    rotateCount = 0;
+                }
             }
 
 

@@ -70,6 +70,9 @@ public class ButcherRabbitBehavior : MonoBehaviour
                         bloodParticles3.SetActive(true);
                         this.GetComponent<SpriteRenderer>().sprite = cutLeg;
                         player.gameObject.GetComponent<UIManager>().ActivateHandElements(0);
+                        player.gameObject.GetComponent<UIManager>().ActivatePopUp(0);
+                        butcherBehavior.GetComponent<ButcherBehavior>().EndChopObtained();
+
                         SoundSystem.instance.PlaySound("stab3");
                         break;
                     default:

@@ -193064,7 +193064,7 @@ MonoBehaviour:
   bloodParticles2: {fileID: 267081558}
   bloodParticles3: {fileID: 1378931410}
   knifeIsOver: 0
-  butcherBehavior: {fileID: 0}
+  butcherBehavior: {fileID: 877715233}
 --- !u!1 &1233110613
 GameObject:
   m_ObjectHideFlags: 0
@@ -303194,7 +303194,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2040302162}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 2de0377659ba82244a5a2c818ef4232a, type: 2}
   m_CullingMode: 0

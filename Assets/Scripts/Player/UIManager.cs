@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using StarterAssets;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -159,12 +160,20 @@ public class UIManager : MonoBehaviour
         popUpName.GetComponent<TextMeshProUGUI>().text = popUpNames[handInt];
         popUpObject.SetActive(true);
         menuIsActive = true;
+
+        DeactivateSelection();
     }
 
     public void DeactivatePopUp()
     {
         popUpObject.SetActive(false);
         menuIsActive = false;
+        hand.SetActive(true);
+        this.GetComponent<FirstPersonController>().enabled = true;
+        this.GetComponent<SelectionBehavior>().enabled = true;
+        Cursor.lockState = CursorLockMode.Locked;
+
+        ActivateSelection();
     }
 
     public void ActivateSelection()

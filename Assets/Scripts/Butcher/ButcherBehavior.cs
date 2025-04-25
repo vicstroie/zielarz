@@ -108,4 +108,11 @@ public class ButcherBehavior : MonoBehaviour
         //chopAnim.SetBool("isChopping", false);
     }
 
+    public void EndChopObtained()
+    {
+        mouseTracker.SetActive(false);
+        backButton.SetActive(false);
+        craftingCam.GetComponent<CinemachineVirtualCamera>().Priority = 10;
+    }
+
 }

@@ -97,4 +97,14 @@ public class HerbalBehavior : MonoBehaviour
     {
         return mortarPestle.GetComponent<MortarBehavior>().canAddFlower();
     }
+
+    public void CompletedTea()
+    {
+        mouseTracker.SetActive(false);
+        backButton.SetActive(false);
+        craftingCam.GetComponent<CinemachineVirtualCamera>().Priority = 10;
+
+        playerObject.GetComponent<UIManager>().ActivateHandElements(1);
+        playerObject.GetComponent<UIManager>().ActivatePopUp(1);
+    }
 }
