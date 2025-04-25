@@ -30,7 +30,8 @@ public class HerbalBasketBehavior : MonoBehaviour
         {
 
             //Check that 1) basket isn't empty 2) mouse is clicked 3) not holding a flower
-            if(basketContents.Count > 0 && Input.GetMouseButtonDown(0) && !HerbalManager.GetComponent<HerbalBehavior>().isHoldingFlower)
+            if(basketContents.Count > 0 && Input.GetMouseButtonDown(0) && !HerbalManager.GetComponent<HerbalBehavior>().isHoldingFlower
+                && HerbalManager.GetComponent<HerbalBehavior>().CanHoldFlower())
             {
                 GameObject currentFlower = basketContents[basketContents.Count - 1];
 

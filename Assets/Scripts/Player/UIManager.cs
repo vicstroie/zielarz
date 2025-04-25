@@ -12,6 +12,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject hand;
     [SerializeField] GameObject leftHand;
     [SerializeField] GameObject selectionMarker;
+
+    [SerializeField] GameObject popUpObject;
+    [SerializeField] GameObject popUpImage;
+    [SerializeField] GameObject popUpName;
+    [SerializeField] List<string> popUpNames;
+
     [SerializeField] List<GameObject> inventory;
     [SerializeField] List<GameObject> inventoryBackground;
     [SerializeField] List<GameObject> inventoryNames;
@@ -146,6 +152,20 @@ public class UIManager : MonoBehaviour
         leftHandMagicSpots[handInt].GetComponent<Image>().sprite = magicSpotDone;
         redLines[handInt].SetActive(true);
     } 
+
+    public void ActivatePopUp(int handInt)
+    {
+        popUpImage.GetComponent<Image>().sprite = leftHandSprites[handInt];
+        popUpName.GetComponent<TextMeshProUGUI>().text = popUpNames[handInt];
+        popUpObject.SetActive(true);
+        menuIsActive = true;
+    }
+
+    public void DeactivatePopUp()
+    {
+        popUpObject.SetActive(false);
+        menuIsActive = false;
+    }
 
     public void ActivateSelection()
     {

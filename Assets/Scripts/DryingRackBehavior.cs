@@ -52,8 +52,8 @@ public class DryingRackBehavior : MonoBehaviour
         contents[emptyPosition] = item;
         item.GetComponent<BillboardEffect>().enabled = false;
         item.GetComponent<PlantBehavior>().PutOnRack(this.gameObject, emptyPosition); //might have problems here
-        item.transform.position = new Vector3(this.transform.position.x + 0.67f, this.transform.position.y - 0.91f, (this.transform.position.z + 2f) - emptyPosition);
-        item.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+        item.transform.position = new Vector3(this.transform.position.x + 0.2f, this.transform.position.y - 0.91f, (this.transform.position.z + 2f) - emptyPosition);
+        item.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
         item.transform.eulerAngles = new Vector3(0, 90, 180);
         item.GetComponent<SpriteRenderer>().enabled = true;
         item.GetComponent<BoxCollider>().enabled = true;

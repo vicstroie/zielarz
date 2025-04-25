@@ -16,6 +16,10 @@ public class HerbalBehavior : MonoBehaviour
     [SerializeField] GameObject grabHand;
     [SerializeField] GameObject mouseTracker;
 
+    [Header("Sprites")]
+    [SerializeField] Sprite openHand;
+    [SerializeField] Sprite closedHand;
+
     public bool isHoldingFlower;
 
     //private
@@ -43,6 +47,7 @@ public class HerbalBehavior : MonoBehaviour
         craftingCam.GetComponent<CinemachineVirtualCamera>().Priority = 100;
         player.GetComponent<FirstPersonController>().enabled = false;
         player.GetComponent<SelectionBehavior>().enabled = false;
+        player.GetComponent<UIManager>().DeactivateSelection();
 
         playerObject = player;
         
@@ -58,6 +63,8 @@ public class HerbalBehavior : MonoBehaviour
         craftingCam.GetComponent<CinemachineVirtualCamera>().Priority = 10;
         playerObject.GetComponent<FirstPersonController>().enabled = true;
         playerObject.GetComponent<SelectionBehavior>().enabled = true;
+        playerObject.GetComponent<UIManager>().ActivateSelection();
+
         Cursor.lockState = CursorLockMode.Locked;
 
 
@@ -71,5 +78,23 @@ public class HerbalBehavior : MonoBehaviour
         isHoldingFlower = true;
         heldFlower = flower;
 
+        grabHand.GetComponent<SpriteRenderer>().sprite = closedHand;
+    }
+
+    public GameObject ReleaseFlower()
+    {
+        isHoldingFlower = false;
+        grabHand.GetComponent<SpriteRenderer>().sprite = openHand;
+
+        heldFlower.GetComponent<FlowerBehavior>().StopHold();
+        GameObject currentFlower = heldFlower;
+        heldFlower = null;
+
+        return currentFlower;
+    }
+
+    public bool CanHoldFlower()
+    {
+        return mortarPestle.GetComponent<MortarBehavior>().canAddFlower();
     }
 }
