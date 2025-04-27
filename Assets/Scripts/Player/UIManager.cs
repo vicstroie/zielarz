@@ -161,6 +161,8 @@ public class UIManager : MonoBehaviour
         popUpObject.SetActive(true);
         menuIsActive = true;
 
+        SoundSystem.instance.PlaySound("popUp");
+
         DeactivateSelection();
     }
 

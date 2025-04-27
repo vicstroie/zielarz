@@ -13,11 +13,12 @@ public class MortarBehavior : MonoBehaviour
     List<GameObject> flowers = new List<GameObject>();
 
     float rotateCount;
+    AudioSource mortarSound;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        mortarSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -45,9 +46,12 @@ public class MortarBehavior : MonoBehaviour
                 pestle.transform.Rotate(0, 1, 0);
                 rotateCount += Time.deltaTime;
 
+                if(!mortarSound.isPlaying) mortarSound.Play();
+
                 if(rotateCount > 5)
                 {
                     herbalBehavior.GetComponent<HerbalBehavior>().CompletedTea();
+                    mortarSound.Stop();
                     
                     for (int i = 0; i < 5; i++) {
                         Destroy(flowers[i].gameObject);
@@ -56,6 +60,9 @@ public class MortarBehavior : MonoBehaviour
 
                     rotateCount = 0;
                 }
+            } else
+            {
+                if (mortarSound.isPlaying) mortarSound.Stop();
             }
 
 
