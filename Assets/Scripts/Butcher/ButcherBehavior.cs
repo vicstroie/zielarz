@@ -14,6 +14,7 @@ public class ButcherBehavior : MonoBehaviour
     [SerializeField] GameObject hand;
     [SerializeField] GameObject knifeHand;
     [SerializeField] GameObject mouseTracker;
+    [SerializeField] GameObject bloodyRabbit;
 
     [Header("Sprites")]
     [SerializeField] Sprite knifeReady;
@@ -89,7 +90,6 @@ public class ButcherBehavior : MonoBehaviour
         playerObject.GetComponent<SelectionBehavior>().enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         
-
         hand.SetActive(true);
         mouseTracker.SetActive(false);
         backButton.SetActive(false);
@@ -113,6 +113,9 @@ public class ButcherBehavior : MonoBehaviour
         mouseTracker.SetActive(false);
         backButton.SetActive(false);
         craftingCam.GetComponent<CinemachineVirtualCamera>().Priority = 10;
+
+        butcherRabbit.SetActive(false);
+        playerObject.GetComponent<InventoryManager>().AddToInventory(bloodyRabbit);
     }
 
 }
