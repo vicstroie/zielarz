@@ -28,6 +28,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] List<Sprite> leftHandSprites;
     [SerializeField] List<GameObject> redLines;
 
+    [SerializeField] GameObject gameManager;
+
     [Header("Sprites")]
     [SerializeField] Sprite idle;
     [SerializeField] Sprite grabbing;
@@ -42,6 +44,7 @@ public class UIManager : MonoBehaviour
     bool leftHandIsActive;
     bool isLookingAtSomething;
     private GameObject[] inventoryValues;
+    int popUpTracker;
 
 
     // Start is called before the first frame update
@@ -108,6 +111,8 @@ public class UIManager : MonoBehaviour
                     ActivateSelection();
             }
 
+            gameManager.GetComponent<GameManager>().leftHandIsActive = leftHandIsActive;
+
         }
 
         if(isLookingAtSomething )
@@ -160,6 +165,9 @@ public class UIManager : MonoBehaviour
         popUpName.GetComponent<TextMeshProUGUI>().text = popUpNames[handInt];
         popUpObject.SetActive(true);
         menuIsActive = true;
+
+        popUpTracker++;
+        if (popUpTracker == 3) gameManager.GetComponent<GameManager>().completedGame = true;
 
         SoundSystem.instance.PlaySound("popUp");
 

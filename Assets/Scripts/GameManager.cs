@@ -13,7 +13,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] Transform grandmaEndTransform;
 
     public bool isTalking;
+    public bool completedGame;
+    public bool leftHandIsActive;
     bool movedGrandma;
+    bool gotRed;
 
 
     // Start is called before the first frame update
@@ -41,5 +44,27 @@ public class GameManager : MonoBehaviour
             grandma.transform.position = grandmaEndTransform.position;
             grandma.transform.rotation = grandmaEndTransform.rotation;
         }
+        
+        if(!gotRed && flowchart.GetComponent<Flowchart>().GetBooleanVariable("isSad"))
+        {
+            player.GetComponent<UIManager>().ActivateHandElements(2);
+            player.GetComponent<UIManager>().ActivatePopUp(2);
+            player.GetComponent<InventoryManager>().CheckForRabbit();
+
+            Cursor.lockState = CursorLockMode.None;
+
+            gotRed = true;
+        }
+    }
+
+    public void HasRabbit()
+    {
+        flowchart.GetComponent<Flowchart>().SetBooleanVariable("hasRabbit", true);
+        Debug.Log("hasRabbit");
+    }
+
+    public void HasBloodyRabbit()
+    {
+        flowchart.GetComponent<Flowchart>().SetBooleanVariable("killedRabbit", true);
     }
 }

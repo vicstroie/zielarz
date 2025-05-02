@@ -109,6 +109,8 @@ public class SelectionBehavior : MonoBehaviour
                     {
                         SoundSystem.instance.PlaySound("rabbitGrab");
                         this.GetComponent<InventoryManager>().AddToInventory(_selection.gameObject);
+                        gameManager.GetComponent<GameManager>().HasRabbit();
+
                         _selection = null;
                     }
                     else
