@@ -15,6 +15,7 @@ public class HerbalBehavior : MonoBehaviour
     [SerializeField] GameObject hand;
     [SerializeField] GameObject grabHand;
     [SerializeField] GameObject mouseTracker;
+    [SerializeField] GameObject basket;
 
     [Header("Sprites")]
     [SerializeField] Sprite openHand;
@@ -52,6 +53,12 @@ public class HerbalBehavior : MonoBehaviour
         playerObject = player;
         
         Cursor.lockState = CursorLockMode.None;
+
+        if(player.GetComponent<InventoryManager>().DoesHaveFlowers())
+        {
+            basket.GetComponent<HerbalBasketBehavior>().AddToBasket(player.GetComponent<InventoryManager>().GetFlowers().Count);
+        }
+
 
         hand.SetActive(false);
         mouseTracker.SetActive(true);

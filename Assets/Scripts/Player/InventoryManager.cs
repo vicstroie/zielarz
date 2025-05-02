@@ -87,6 +87,25 @@ public class InventoryManager : MonoBehaviour
         return hasFlowers;
     }
 
+    public List<GameObject> GetFlowers()
+    {
+        List<GameObject> flowers = new List<GameObject>();
+
+        for (int i = 0; i < maxCapacity; i++)
+        {
+            if (inventory[i] != null && inventory[i].CompareTag("Plant"))
+            {
+                flowers.Add(inventory[i]);
+                inventory[i] = null;
+                i--;
+            }
+
+        }
+
+        return flowers;
+
+    }
+
     public GameObject GetLastFlower()
     {
         List<GameObject> flowers = new List<GameObject>();

@@ -83,7 +83,7 @@ public class SelectionBehavior : MonoBehaviour
                         this.GetComponent<UIManager>().WarnFullBasket();
                     }
                 }
-                else if (_selection.CompareTag("DryingRack"))
+                /*else if (_selection.CompareTag("DryingRack"))
                 {
                     //Checks if DryingRack is full, and if inventory is empty
                     if (!_selection.GetComponent<DryingRackBehavior>().InventoryIsFull() && !this.GetComponent<InventoryManager>().InventoryIsEmpty())
@@ -92,7 +92,7 @@ public class SelectionBehavior : MonoBehaviour
                         //Adds last addition to inventory to dryingrack
                         if (this.GetComponent<InventoryManager>().DoesHaveFlowers()) _selection.GetComponent<DryingRackBehavior>().AddToInventory(this.GetComponent<InventoryManager>().GetLastFlower());
                     }
-                }
+                } */
                 else if (_selection.CompareTag("Crafting"))
                 {
                     Debug.Log("isCrafting");

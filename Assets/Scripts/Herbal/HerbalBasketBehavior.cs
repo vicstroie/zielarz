@@ -46,9 +46,9 @@ public class HerbalBasketBehavior : MonoBehaviour
     }
 
     //Called by plants, adds flowers to basket
-    public void AddToBasket()
+    public void AddToBasket(int flowerNum)
     {
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < flowerNum; i++)
         {
             float randX = Random.Range(-0.1f, 0.1f);
             float randZ = Random.Range(-0.2f, 0.2f);

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class MortarBehavior : MonoBehaviour
@@ -9,6 +10,7 @@ public class MortarBehavior : MonoBehaviour
     [SerializeField] GameObject mouseTracker;
     [SerializeField] GameObject herbalBehavior;
     [SerializeField] GameObject pestle;
+    [SerializeField] GameObject mortarCount;
 
     List<GameObject> flowers = new List<GameObject>();
 
@@ -34,6 +36,7 @@ public class MortarBehavior : MonoBehaviour
             if (herbalBehavior.GetComponent<HerbalBehavior>().isHoldingFlower && Input.GetMouseButtonDown(0))
             {
                 flowers.Add(herbalBehavior.GetComponent<HerbalBehavior>().ReleaseFlower());
+                mortarCount.GetComponent<TextMeshPro>().text = flowers.Count.ToString() + " / 5";
 
                 float randX = Random.Range(-0.05f, 0.05f);
                 float randZ = Random.Range(-0.05f, 0.05f);
@@ -43,6 +46,9 @@ public class MortarBehavior : MonoBehaviour
 
             if (flowers.Count == 5 && Input.GetMouseButton(0))
             {
+
+                mortarCount.SetActive(false);
+
                 pestle.transform.Rotate(0, 1, 0);
                 rotateCount += Time.deltaTime;
 

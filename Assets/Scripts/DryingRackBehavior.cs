@@ -61,7 +61,7 @@ public class DryingRackBehavior : MonoBehaviour
 
     public void SendFlowerToTable(int index)
     {
-        tableBasket.GetComponent<HerbalBasketBehavior>().AddToBasket();
+        //tableBasket.GetComponent<HerbalBasketBehavior>().AddToBasket();
         Destroy(contents[index].gameObject);
     }
 }
