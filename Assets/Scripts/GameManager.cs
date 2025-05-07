@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO.Pipes;
 using Fungus;
 using StarterAssets;
 using UnityEngine;
+using TMPro;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +14,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject player;
     [SerializeField] GameObject grandma;
     [SerializeField] Transform grandmaEndTransform;
+    [SerializeField] GameObject blink;
 
     public bool isTalking;
     public bool completedGame;
@@ -28,7 +32,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         isTalking = flowchart.GetComponent<Flowchart>().GetBooleanVariable("isTalking");
+        if (!movedGrandma && flowchart.GetComponent<Flowchart>().GetBooleanVariable("doneTutorial")) {
+            grandma.GetComponent<MoveGrandma>().isWalking = true;
+            movedGrandma = true;
+            grandma.GetComponent<VillagerInfo>().enabled = false;
+        }
+        */
+       
 
         if (isTalking)
         {
@@ -39,11 +51,25 @@ public class GameManager : MonoBehaviour
             if (!player.GetComponent<FirstPersonController>().isActiveAndEnabled) player.GetComponent<FirstPersonController>().enabled = true;
         }
 
+        
         if (!movedGrandma && flowchart.GetComponent<Flowchart>().GetBooleanVariable("doneTutorial"))
         {
-            grandma.transform.position = grandmaEndTransform.position;
-            grandma.transform.rotation = grandmaEndTransform.rotation;
+            player.GetComponent<FirstPersonController>().enabled = false;
+            blink.GetComponent<Image>().color = Color.Lerp(blink.GetComponent<Image>().color, new Color(0, 0, 0, 1), 5 * Time.deltaTime);
+            if (blink.GetComponent<Image>().color == new Color(0, 0, 0, 1))
+            {
+                movedGrandma = true;
+                grandma.transform.position = grandmaEndTransform.position;
+                grandma.transform.rotation = grandmaEndTransform.rotation;
+                player.GetComponent<FirstPersonController>().enabled = true;
+            }
         }
+
+        if(movedGrandma && blink.GetComponent<Image>().color != new Color(0, 0, 0, 0))
+        {
+            blink.GetComponent<Image>().color = Color.Lerp(blink.GetComponent<Image>().color, new Color(0, 0, 0, 0), 5 * Time.deltaTime);
+        }
+        
         
         if(!gotRed && flowchart.GetComponent<Flowchart>().GetBooleanVariable("isSad"))
         {
@@ -67,4 +93,5 @@ public class GameManager : MonoBehaviour
     {
         flowchart.GetComponent<Flowchart>().SetBooleanVariable("killedRabbit", true);
     }
+
 }
