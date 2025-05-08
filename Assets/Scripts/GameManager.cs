@@ -33,14 +33,14 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         /*
-        isTalking = flowchart.GetComponent<Flowchart>().GetBooleanVariable("isTalking");
         if (!movedGrandma && flowchart.GetComponent<Flowchart>().GetBooleanVariable("doneTutorial")) {
             grandma.GetComponent<MoveGrandma>().isWalking = true;
             movedGrandma = true;
             grandma.GetComponent<VillagerInfo>().enabled = false;
         }
         */
-       
+
+        isTalking = flowchart.GetComponent<Flowchart>().GetBooleanVariable("isTalking");
 
         if (isTalking)
         {

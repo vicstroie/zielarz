@@ -68,6 +68,7 @@ public class ButcherBehavior : MonoBehaviour
         craftingCam.GetComponent<CinemachineVirtualCamera>().Priority = 100;
         player.GetComponent<FirstPersonController>().enabled = false;
         player.GetComponent<SelectionBehavior>().enabled = false;
+        player.GetComponent<UIManager>().DeactivateSelection();
         playerObject = player;
         
         Cursor.lockState = CursorLockMode.None; 
@@ -89,6 +90,7 @@ public class ButcherBehavior : MonoBehaviour
         craftingCam.GetComponent<CinemachineVirtualCamera>().Priority = 10;
         playerObject.GetComponent<FirstPersonController>().enabled = true;
         playerObject.GetComponent<SelectionBehavior>().enabled = true;
+        playerObject.GetComponent<UIManager>().ActivateSelection();
         Cursor.lockState = CursorLockMode.Locked;
         
         hand.SetActive(true);

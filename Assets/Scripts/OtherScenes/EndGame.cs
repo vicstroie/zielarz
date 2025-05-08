@@ -16,6 +16,8 @@ public class EndGame : MonoBehaviour
         restartButton.SetActive(false);
 
         Invoke("ActivateEasyText", 4);
+
+        Cursor.lockState = CursorLockMode.None;
     }
 
     // Update is called once per frame
